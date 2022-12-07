@@ -16,12 +16,13 @@ function getComputerChoice() {
     }
 }
 
-// This function just prompts an input from the user
+// This function just prompts for an input from the user
 function getPlayerSelection() {
     return prompt("Choose: Rock, Paper, or Scissor?");
 }
 
 // This function plays 1 round, and outputs the result
+// The values from the above player and computer choices functions are stored in a variable here for evaluation
 function playRound() {
     let computerChoice = getComputerChoice();
     let playerChoice = "";
@@ -31,33 +32,43 @@ function playRound() {
     console.log(`You: ${myChoice}`);
     console.log(`Computer: ${computerChoice}`);
 
+    // Round Tie condition is decided here
     if (myChoice === computerChoice) {
         console.log(`Your Score: ${playerWins}`);
         console.log(`Computer's Score: ${computerWins}`);
-        return `It's a Tie! ${myChoice} vs ${computerChoice}`;
+        console.log(`It's a Tie! ${myChoice} vs ${computerChoice}`);
+        return;
     }
     // All player WIN conditions mentioned in one "else if" statement
     else if (myChoice === "ROCK" && computerChoice === "SCISSOR" || myChoice === "PAPER" && computerChoice === "ROCK" || myChoice === "SCISSOR" && computerChoice === "PAPER") {
         playerWins = ++playerWins;
         console.log(`Your Score: ${playerWins}`);
         console.log(`Computer's Score: ${computerWins}`);
-        return `Round won! your ${myChoice} beats ${computerChoice}`;
+        console.log(`Round won! your ${myChoice} beats ${computerChoice}`);
+        return;
     }
     // All player LOSE conditions mentioned in one "else if" statement
     else if (computerChoice === "ROCK" && myChoice === "SCISSOR" || computerChoice === "PAPER" && myChoice === "ROCK" || computerChoice === "SCISSOR" && myChoice === "PAPER") {
         computerWins = ++computerWins;
         console.log(`Your Score: ${playerWins}`);
         console.log(`Computer's Score: ${computerWins}`);
-        return `Round lost! ${computerChoice} beats your ${myChoice}`;
+        console.log(`Round lost! ${computerChoice} beats your ${myChoice}`);
+        return;
     }
+    // If there's any spelling mistake in the user input, then this condition re-runs the function again
+    // User is asked for an input again, and computer generates another input to all be evaluated again
     else {
-        return `"${playerChoice}" is not a valid input`;
+        console.log(`"${playerChoice}" is not a valid input. Try again!`);
+        console.log("");
+        playRound();
     }
 }
 
+// This function calls playRound() function until 5 rounds are played with a clear result
+// It then compares the player's and computer's round wins to declare the winner
 function game() {
     for (let i = 1; i < 6; i++) {
-        console.log("")
+        console.log("");
         console.log(`----------- ROUND  ${i} -----------`);
         console.log(playRound());
     }
@@ -74,12 +85,10 @@ function game() {
     console.log(`GAME IS TIED!  computer wins: ${totalCompterWins}   your wins: ${totalPlayerWins}`);
    }
 }
-
-
+// Above this comment contains all the function declarations to play the RPS game
+// Below are the global variables that will store the round wins values throughout the game
 let playerWins = 0;
 let computerWins = 0;
 
+// This calls for the game to start (best of 5 rounds)
 game();
-
-// The resulting output
-// alert(`Computer chose ${computerChoice}, which means...`);
