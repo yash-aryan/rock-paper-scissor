@@ -1,0 +1,43 @@
+body {
+    color: lavender;
+    background-color: black;
+    font-family: monospace;
+}
+
+h1 {
+    font-size: 4rem;
+    margin-left: 5rem;
+}
+
+.container,
+form {
+    display: flex;
+    flex-direction: row;
+    gap: 7rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    margin-top: 5rem;
+}
+
+input[type="image"] {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 10%;
+    border: 0.5rem solid lavender;
+}
+
+.results {
+    background-color: black;
+    border: 2px solid lavender;
+    width: 50rem;
+    height: 15rem;
+    margin: 5rem auto;
+    padding: 1rem;
+}
+
+.results > h3 {
+    margin-top: 0;
+}

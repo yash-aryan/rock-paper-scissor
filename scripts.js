@@ -1,7 +1,7 @@
 // This function generates random choice for the computer
 // Using Math.random() to generate numbers from 0 - 100, it outputs the following: 
-// "rock" for numbers  0 - 33, "paper" for 34 - 66, "scissor" for 67 - 100
-function getComputerChoice() {
+// "ROCK" for numbers  0 - 33, "paper" for 34 - 66, "scissor" for 67 - 100
+function getBotChoice() {
     let keyValue = 0;
     keyValue = Math.floor(Math.random() * 100);
     switch (true) {
@@ -16,79 +16,69 @@ function getComputerChoice() {
     }
 }
 
-// This function just prompts for an input from the user
-function getPlayerSelection() {
-    return prompt("Choose: Rock, Paper, or Scissor?");
-}
-
-// This function plays 1 round, and outputs the result
-// The values from the above player and computer choices functions are stored in a variable here for evaluation
+// Plays 1 round, evaluates the winner and adds points accoordingly, points are not added for tie
 function playRound() {
-    let computerChoice = getComputerChoice();
-    let playerChoice = "";
-    playerChoice = getPlayerSelection();
-    let myChoice = playerChoice.toUpperCase();
-
-    console.log(`You: ${myChoice}`);
-    console.log(`Computer: ${computerChoice}`);
+    let botChoice = getBotChoice();
+    console.log(`You: ${playerChoice}`);
+    console.log(`Computer: ${botChoice}`);
 
     // Round Tie condition is decided here
-    if (myChoice === computerChoice) {
+    if (playerChoice === botChoice) {
         console.log(`Your Score: ${playerWins}`);
-        console.log(`Computer's Score: ${computerWins}`);
-        console.log(`It's a Tie! ${myChoice} vs ${computerChoice}`);
+        console.log(`Computer's Score: ${botWins}`);
+        console.log(`It's a Tie! ${playerChoice} vs ${botChoice}`);
         return;
     }
     // All player WIN conditions mentioned in one "else if" statement
-    else if (myChoice === "ROCK" && computerChoice === "SCISSOR" || myChoice === "PAPER" && computerChoice === "ROCK" || myChoice === "SCISSOR" && computerChoice === "PAPER") {
+    else if 
+    (playerChoice === "ROCK" && botChoice === "SCISSOR" || 
+    playerChoice === "PAPER" && botChoice === "ROCK" || 
+    playerChoice === "SCISSOR" && botChoice === "PAPER") {
         playerWins = ++playerWins;
         console.log(`Your Score: ${playerWins}`);
-        console.log(`Computer's Score: ${computerWins}`);
-        console.log(`Round won! your ${myChoice} beats ${computerChoice}`);
+        console.log(`Computer's Score: ${botWins}`);
+        console.log(`Round won! your ${playerChoice} beats ${botChoice}`);
         return;
     }
     // All player LOSE conditions mentioned in one "else if" statement
-    else if (computerChoice === "ROCK" && myChoice === "SCISSOR" || computerChoice === "PAPER" && myChoice === "ROCK" || computerChoice === "SCISSOR" && myChoice === "PAPER") {
-        computerWins = ++computerWins;
+    else if 
+    (botChoice === "ROCK" && playerChoice === "SCISSOR" || 
+    botChoice === "PAPER" && playerChoice === "ROCK" || 
+    botChoice === "SCISSOR" && playerChoice === "PAPER") {
+        botWins = ++botWins;
         console.log(`Your Score: ${playerWins}`);
-        console.log(`Computer's Score: ${computerWins}`);
-        console.log(`Round lost! ${computerChoice} beats your ${myChoice}`);
+        console.log(`Computer's Score: ${botWins}`);
+        console.log(`Round lost! ${botChoice} beats your ${playerChoice}`);
         return;
     }
-    // If there's any spelling mistake in the user input, then this condition re-runs the function again
-    // User is asked for an input again, and computer generates another input to all be evaluated again
-    else {
-        console.log(`"${playerChoice}" is not a valid input. Try again!`);
-        console.log("");
-        playRound();
-    }
+
+    else console.log("How can this happen?!");
 }
 
-// This function calls playRound() function until 5 rounds are played with a clear result
-// It then compares the player's and computer's round wins to declare the winner
-function game() {
-    for (let i = 1; i < 6; i++) {
-        console.log("");
-        console.log(`----------- ROUND  ${i} -----------`);
-        console.log(playRound());
-    }
-   let totalCompterWins = computerWins;
-   let totalPlayerWins = playerWins;
-
-   if (totalCompterWins > totalPlayerWins) {
-    console.log(`YOU LOSE THE GAME! computer wins: ${totalCompterWins}   your wins: ${totalPlayerWins}`);
-   }
-   else if (totalCompterWins < totalPlayerWins) {
-    console.log(`YOU WIN THE GAME!  computer wins: ${totalCompterWins}   your wins: ${totalPlayerWins}`);
-   }
-   else {
-    console.log(`GAME IS TIED!  computer wins: ${totalCompterWins}   your wins: ${totalPlayerWins}`);
-   }
-}
-// Above this comment contains all the function declarations to play the RPS game
-// Below are the global variables that will store the round wins values throughout the game
 let playerWins = 0;
-let computerWins = 0;
+let botWins = 0;
+let playerChoice = "";
 
-// This calls for the game to start (best of 5 rounds)
-game();
+// Gets all RPS buttons as node references, therefore storing it in a nodelist to iterate upon using forEach()
+let buttons = document.querySelectorAll('#btn');
+buttons.forEach((button) => {
+    // Add eventListeneter on each RPS button to take the corresponding inputs
+    button.addEventListener('mouseenter', getAltText);
+});
+// Main function that uses the alt text on the RPS buttons as string input
+// Calls playRound() until best of 5, and then declares the winner
+function getAltText(e) {
+    playerChoice = e.currentTarget.alt.toUpperCase();
+    playRound()
+    if (playerWins + botWins === 5) {
+        if (botWins > playerWins) {
+            console.log(`YOU LOSE THE GAME! computer wins: ${botWins}   your wins: ${playerWins}`);
+           }
+           else if (botWins < playerWins) {
+            console.log(`YOU WIN THE GAME!  computer wins: ${botWins}   your wins: ${playerWins}`);
+           }
+           else {
+            console.log(`GAME IS TIED!  computer wins: ${botWins}   your wins: ${playerWins}`);
+           }
+    }
+}

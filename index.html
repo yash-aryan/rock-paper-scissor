@@ -5,29 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissor</title>
-    <style>
-        body {
-            color: lavender;
-            background-color: #181824;
-            padding: 10%;
-            font-family: Montserrat, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-style: italic;
-        }
-
-        h1 {
-            font-size: 4rem;
-        }
-        </style>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./scripts.js" defer></script>
 </head>
 <body>
-    <h1>Rock Paper Scissor!</h1>
-    <h2>Game info:</h2>
-    <ul>
-        <li>You vs The Computer</li>
-        <li>The game is best of 5 rounds</li>
-        <li>To Check Results: <strong>Please open Console using F12 key</strong></li>
-        <li>Type out your move: "Rock", "paper", "scissor"</li>
-    </ul>
-    <script src="./scripts.js"></script>
+    <h1>Rock Paper Scissors!</h1>
+    <div class="container">
+        <form>
+            <input id="btn" type="image" src="./images/rock.png" alt="Rock">
+            <input id="btn" type="image" src="./images/paper.png" alt="Paper">
+            <input id="btn" type="image" src="./images/scissors.png" alt="Scissor">
+        </form>
+    </div>
+    <div class="results">
+        <h3>Best of 5 Rounds!</h3>
+    </div>
 </body>
 </html>
