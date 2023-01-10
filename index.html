@@ -1,24 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rock Paper Scissor</title>
-    <link rel="stylesheet" href="./styles.css">
-    <script src="./scripts.js" defer></script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Rock Paper Scissor</title>
+	<link rel="stylesheet" href="./styles.css">
+	<script src="./scripts.js" defer></script>
 </head>
+
 <body>
-    <h1>Rock Paper Scissors!</h1>
-    <div class="container">
-        <form>
-            <input id="btn" type="image" src="./images/rock.png" alt="Rock">
-            <input id="btn" type="image" src="./images/paper.png" alt="Paper">
-            <input id="btn" type="image" src="./images/scissors.png" alt="Scissor">
-        </form>
-    </div>
-    <div class="results">
-        <h3>Best of 5 Rounds!</h3>
-    </div>
+	<h1>>>> Rock Paper Scissors</h1>
+	<div class="rps-buttons">
+		<form>
+			<input id="btn" type="image" src="./images/rock.png" alt="Rock">
+			<input id="btn" type="image" src="./images/paper.png" alt="Paper">
+			<input id="btn" type="image" src="./images/scissors.png" alt="Scissor">
+		</form>
+	</div>
+	<div class="output-container">
+		<h2>>>> Best of 5 Wins!</h2>
+		<div>
+			<div class="left">
+				<p class="pl-choice"></p>
+				<p class="bot-choice"></p>
+				<p class="round-status"></p>
+			</div>
+			<div class="right">
+				<div class="col1">
+					<p>You</p>
+					<p class="pl-score"></p>
+				</div>
+				<div class="col2">
+					<p>Computer</p>
+					<p class="bot-score"></p>
+				</div>
+			</div>
+		</div>
+		<h2>>>> Result</h2>
+		<p class="result"></p>
+	</div>
 </body>
+
 </html>
