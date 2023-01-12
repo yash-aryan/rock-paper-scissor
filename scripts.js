@@ -10,6 +10,7 @@ let textResult_dom = document.querySelector(".result");
 let playerWins = 0;
 let botWins = 0;
 let playerChoice = "";
+let roundNumber = 0;
 
 // Gets all RPS buttons as node references, therefore storing it in a nodelist to iterate upon using forEach()
 let buttons = document.querySelectorAll("#btn");
@@ -27,14 +28,18 @@ function startGame(e) {
   playerChoice = e.currentTarget.alt.toUpperCase();
   playRound();
   console.log("HELLO");
-  if (playerWins + botWins === 5) {
+  if (playerWins === 5 || botWins === 5) {
     if (botWins > playerWins) {
-      textResult_dom.textContent += "You lose!";
+      textResult_dom.textContent += "You lose the game!";
     } else if (botWins < playerWins) {
-      textResult_dom.textContent += "You win!";
+      textResult_dom.textContent += "You win the game!";
     } else {
-      textResult_dom.textContent += "Tied!";
+      textResult_dom.textContent += "The game is tied!";
     }
+    buttons.forEach((button) => {
+      // REmove eventListeneter on each RPS button to take the corresponding inputs
+      button.removeEventListener("click", startGame);
+    });
   }
 }
 
@@ -58,13 +63,14 @@ function getBotChoice() {
 
 // Plays 1 round, evaluates the winner and adds points accoordingly, points are not added for tie
 function playRound() {
+  roundNumber++;
   let botChoice = getBotChoice();
   plChoice_dom.textContent = `You chose: ${playerChoice}`;
   botChoice_dom.textContent = `Computer chooses: ${botChoice}`;
 
   // Round Tie condition is decided here
   if (playerChoice === botChoice) {
-    roundStatus_dom.textContent = "It's a Tie, same choices!";
+    roundStatus_dom.textContent = `Round: ${roundNumber} - It's a Tie, same choices!`;
     plScore_dom.textContent = `${playerWins}`;
     botScore_dom.textContent = `${botWins}`;
     return;
@@ -76,7 +82,7 @@ function playRound() {
     (playerChoice === "SCISSOR" && botChoice === "PAPER")
   ) {
     playerWins = ++playerWins;
-    roundStatus_dom.textContent = `Round won! your ${playerChoice} beats ${botChoice}`;
+    roundStatus_dom.textContent = `Round: ${roundNumber} - Round won! your ${playerChoice} beats ${botChoice}`;
     plScore_dom.textContent = `${playerWins}`;
     botScore_dom.textContent = `${botWins}`;
     return;
@@ -88,7 +94,7 @@ function playRound() {
     (botChoice === "SCISSOR" && playerChoice === "PAPER")
   ) {
     botWins = ++botWins;
-    roundStatus_dom.textContent = `Round lost! ${botChoice} beats your ${playerChoice}`;
+    roundStatus_dom.textContent = `Round: ${roundNumber} - Round lost! ${botChoice} beats your ${playerChoice}`;
     plScore_dom.textContent = `${playerWins}`;
     botScore_dom.textContent = `${botWins}`;
     return;

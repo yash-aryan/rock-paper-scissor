@@ -12,20 +12,19 @@ h1 {
 
 /* ----- RPS BUTTONS ----- */
 
-.rps-buttons,
-form {
+.rps-buttons {
   display: flex;
   flex-direction: row;
-  gap: 10rem;
   justify-content: center;
   align-items: center;
+  gap: 10rem;
 }
 
-.rps-buttons form {
+.rps-buttons > form {
   padding: 2rem;
 }
 
-input[type="image"] {
+.rps-buttons input[type="image"] {
   width: 10rem;
   height: 10rem;
   border: 2px solid lavender;
@@ -35,15 +34,16 @@ input[type="image"] {
 
 .output-container {
   background-color: black;
-  width: 50rem;
-  height: 15rem;
+  /* width: 50rem;
+  height: 15rem; */
   margin: auto;
   padding: 1rem;
   display: flex;
   flex-direction: column;
 }
 
-.output-container > div {
+.events-container {
+  margin: 0 4rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -51,7 +51,6 @@ input[type="image"] {
 }
 
 .right {
-  /* border: 2px solid green; */
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -59,7 +58,6 @@ input[type="image"] {
 
 .col1,
 .col2 {
-  /* border: 2px solid blue; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -70,7 +68,7 @@ input[type="image"] {
 }
 
 .result {
-  margin: 0;
+  margin: auto;
   font-size: 1.5rem;
   font-weight: 700;
 }
